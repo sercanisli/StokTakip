@@ -44,10 +44,6 @@ namespace Business.Concrete
             }
         }
 
-        public bool ProductExists(Product product)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update(Product product)
         {
@@ -59,5 +55,6 @@ namespace Business.Concrete
         {
             return _productDal.GetAll(p => p.CategoryId == categoryId);
         }
+
     }
 }

@@ -13,9 +13,7 @@ namespace Business.Abstract
         List<Product> GetProductsByCategory(int categoryId);
         void Add(Product product);
         void Delete(Product product);
-        bool ProductExists(Product product);
         void Update(Product product);
-
 
     }
 }

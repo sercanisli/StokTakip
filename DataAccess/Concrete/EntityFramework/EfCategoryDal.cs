@@ -12,5 +12,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCategoryDal : EfEntityRepositoryBase<Category, NorthwindContext>, ICategoryDal
     {
+        NorthwindContext northwindContext = new NorthwindContext();
+
+        public bool CategoryExists(string isExists)
+        {
+            var result = northwindContext.Set<Category>().Any(c => c.CategoryName == isExists);
+            return result;
+        }
     }
 }

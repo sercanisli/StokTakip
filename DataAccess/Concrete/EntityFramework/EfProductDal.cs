@@ -11,7 +11,13 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase<Product,NorthwindContext>,IProductDal
+    public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
     {
+        private NorthwindContext northwindContext = new NorthwindContext();
+        public bool ProductExists(string isExists)
+        {
+            var result =northwindContext.Set<Product>().Any(p => p.ProductName == isExists);
+            return result;
+        }
     }
 }

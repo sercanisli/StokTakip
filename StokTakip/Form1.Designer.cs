@@ -156,7 +156,7 @@ namespace StokTakip
             this.btn_Update_Update.Name = "btn_Update_Update";
             this.btn_Update_Update.Size = new System.Drawing.Size(113, 45);
             this.btn_Update_Update.TabIndex = 9;
-            this.btn_Update_Update.Text = "GÜNCELLE";
+            this.btn_Update_Update.Text = "UPDATE";
             this.btn_Update_Update.UseVisualStyleBackColor = true;
             this.btn_Update_Update.Click += new System.EventHandler(this.btn_Update_Update_Click);
             // 

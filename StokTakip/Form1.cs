@@ -26,10 +26,14 @@ namespace StokTakip
 
             _productService = InstanceFactory.GetInstance<IProductService>();
             _categoryService = InstanceFactory.GetInstance<ICategoryService>();
+            _productDal = InstanceFactory.GetInstance<IProductDal>();
+            _categoryDal = InstanceFactory.GetInstance<ICategoryDal>();
         }
 
         private IProductService _productService;
         private ICategoryService _categoryService;
+        private IProductDal _productDal;
+        private ICategoryDal _categoryDal;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -109,33 +113,51 @@ namespace StokTakip
 
         private void btn_Add_Add_Click(object sender, EventArgs e)
         {
-            _productService.Add(new Product
+            var result=_productDal.ProductExists(tbx_Add_ProductName.Text);
+            if (result == false)
             {
-                ProductName = tbx_Add_ProductName.Text,
-                CategoryId = Convert.ToInt32(cmx_Add_ProductCategory.SelectedValue),
-                UnitPrice = Convert.ToInt32(nmrUD_Add_Price.Text),
-                UnitsInStock = Convert.ToInt16(nmrUD_add_UnitInStock.Text)
-            });
-            MessageBox.Show("Successful");
-            tbx_Add_ProductName.Clear();
-            ListProductForAddPage();
-            ListProductForDeletePage();
-            ListProductsForUpdatePage();
-            LoadComboBoxForAddPageInProducts();
+                _productService.Add(new Product
+                {
+                    ProductName = tbx_Add_ProductName.Text,
+                    CategoryId = Convert.ToInt32(cmx_Add_ProductCategory.SelectedValue),
+                    UnitPrice = Convert.ToInt32(nmrUD_Add_Price.Text),
+                    UnitsInStock = Convert.ToInt16(nmrUD_add_UnitInStock.Text)
+                });
+                MessageBox.Show("Successful");
+                tbx_Add_ProductName.Clear();
+                ListProductForAddPage();
+                ListProductForDeletePage();
+                ListProductsForUpdatePage();
+                LoadComboBoxForAddPageInProducts();
+            }
+            else
+            {
+                MessageBox.Show("Already added");
+            }
         }
+
+    
 
         private void btn_Add_Category_Click(object sender, EventArgs e)
         {
-            _categoryService.Add(new Category
+            var result = _categoryDal.CategoryExists(tbx_Add_CategoryName.Text);
+            if (result==false)
             {
-                CategoryName = tbx_Add_CategoryName.Text
-            });
-            MessageBox.Show("Successful");
-            tbx_Add_CategoryName.Clear();
-            ListCategoryForAddPage();
-            ListCategoryForDeletePage();
-            ListProductsForUpdatePage();
-            LoadComboBoxForAddPageInProducts();
+                _categoryService.Add(new Category
+                {
+                    CategoryName = tbx_Add_CategoryName.Text
+                });
+                MessageBox.Show("Successful");
+                tbx_Add_CategoryName.Clear();
+                ListCategoryForAddPage();
+                ListCategoryForDeletePage();
+                ListProductsForUpdatePage();
+                LoadComboBoxForAddPageInProducts();
+            }
+            else
+            {
+                MessageBox.Show("Already Added");
+            }
         }
 
         private void dgView_Update_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -176,6 +198,7 @@ namespace StokTakip
                 ListProductsForUpdatePage();
                 ListProductForAddPage();
                 ListCategoryForDeletePage();
+                ListCategoryForAddPage();
 
             }
             catch (Exception exception)

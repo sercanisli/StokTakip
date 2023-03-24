@@ -25,7 +25,6 @@ namespace DataAccess.Concrete.EntityFramework
                 context.SaveChanges();
             }
         }
-
         public void Delete(TEntity entity)
         {
             using (TContext context = new TContext())
@@ -60,19 +59,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        //public List<Category> GetCategoriesNames()
-        //{
-        //    using (TContext context = new TContext())
-        //    {
-        //        return;
-        //    }
-            
-        //}
-
-        public bool ProductExists(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Update(TEntity entity)
         {
